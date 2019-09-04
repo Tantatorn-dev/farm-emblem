@@ -1,15 +1,16 @@
 <template>
   <div>
     <h1>FARM emblem</h1>
-    <table v-for="row in tableData" v-bind:key="row">
-      <tr v-for="cell in row" v-bind:key="cell">
-        <td></td>
+    <h2>Step {{stepCount}}</h2>
+    <table v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
+      <tr v-for="(item,index) in row" v-bind:key="`${index}-${rowIndex}`">
+        <td>{{tableData[rowIndex][index]}}</td>
       </tr>
     </table>
     <div id="menu">
       <div v-if="isStartSimulation">
-        <button>back</button>
-        <button>next</button>
+        <button @click="setBack">back</button>
+        <button @click="setNext">next</button>
       </div>
       <div v-else>
         <form>
@@ -36,10 +37,12 @@
 <script>
 export default {
   name: "MainPage",
+
   data() {
     return {
       searchType: "depth first search",
       isStartSimulation: false,
+      stepCount: 0,
       tableData: [
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
@@ -52,9 +55,62 @@ export default {
       ]
     };
   },
+
+  created() {
+    
+    // random enemies position
+    let countEnemies = 0;
+    while (countEnemies != 2) {
+      let randRow = Math.floor(Math.random() * 4);
+      let randCol = Math.floor(Math.random() * 7);
+      if (this.tableData[randRow][randCol] == "L") {
+        continue;
+      } else {
+        this.tableData[randRow][randCol] = "L";
+        countEnemies++;
+      }
+    }
+
+    countEnemies = 0;
+    for (let i = 0; i < 2; i++) {
+      let randRow = Math.floor(Math.random() * 4);
+      let randCol = Math.floor(Math.random() * 7);
+      if (this.tableData[randRow][randCol] == "S") {
+        continue;
+      } else {
+        this.tableData[randRow][randCol] = "S";
+        countEnemies++;
+      }
+    }
+
+    countEnemies=0;
+    for (let i = 0; i < 2; i++) {
+      let randRow = Math.floor(Math.random() * 4);
+      let randCol = Math.floor(Math.random() * 7);
+      if (this.tableData[randRow][randCol] == "A") {
+        continue;
+      } else {
+        this.tableData[randRow][randCol] = "A";
+        countEnemies++;
+      }
+    }
+
+    //random allies position
+    countEnemies = 0;
+
+  },
+
   methods: {
     startSimulation: function() {
       this.isStartSimulation = !this.isStartSimulation;
+    },
+    setNext: function() {
+      this.tableData[3][3] = "";
+      this.stepCount += 1;
+    },
+    setBack: function() {
+      this.tableData[3][3] = "";
+      this.stepCount -= 1;
     }
   }
 };
