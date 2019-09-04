@@ -57,13 +57,12 @@ export default {
   },
 
   created() {
-    
     // random enemies position
     let countEnemies = 0;
     while (countEnemies != 2) {
       let randRow = Math.floor(Math.random() * 4);
       let randCol = Math.floor(Math.random() * 7);
-      if (this.tableData[randRow][randCol] == "L") {
+      if (this.tableData[randRow][randCol] != "b") {
         continue;
       } else {
         this.tableData[randRow][randCol] = "L";
@@ -72,10 +71,10 @@ export default {
     }
 
     countEnemies = 0;
-    for (let i = 0; i < 2; i++) {
+    while (countEnemies != 2) {
       let randRow = Math.floor(Math.random() * 4);
       let randCol = Math.floor(Math.random() * 7);
-      if (this.tableData[randRow][randCol] == "S") {
+      if (this.tableData[randRow][randCol] != "") {
         continue;
       } else {
         this.tableData[randRow][randCol] = "S";
@@ -83,11 +82,11 @@ export default {
       }
     }
 
-    countEnemies=0;
-    for (let i = 0; i < 2; i++) {
+    countEnemies = 0;
+    while (countEnemies != 2) {
       let randRow = Math.floor(Math.random() * 4);
       let randCol = Math.floor(Math.random() * 7);
-      if (this.tableData[randRow][randCol] == "A") {
+      if (this.tableData[randRow][randCol] != "") {
         continue;
       } else {
         this.tableData[randRow][randCol] = "A";
@@ -97,7 +96,6 @@ export default {
 
     //random allies position
     countEnemies = 0;
-
   },
 
   methods: {
