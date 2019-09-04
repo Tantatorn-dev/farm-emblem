@@ -6,6 +6,30 @@
         <td></td>
       </tr>
     </table>
+    <div id="menu">
+      <div v-if="isStartSimulation">
+        <button>back</button>
+        <button>next</button>
+      </div>
+      <div v-else>
+        <form>
+          <input
+            type="radio"
+            name="search type"
+            value="depth first search"
+            checked
+            v-model="searchType"
+          /> Depth First Search
+          <input
+            type="radio"
+            name="search type"
+            value="depth limited search"
+            v-model="searchType"
+          /> Depth Limited Search
+        </form>
+        <button @click="startSimulation">Start Simulation!</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,6 +38,8 @@ export default {
   name: "MainPage",
   data() {
     return {
+      searchType: "depth first search",
+      isStartSimulation: false,
       tableData: [
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
@@ -25,11 +51,15 @@ export default {
         ["", "", "", "", "", "", "", ""]
       ]
     };
+  },
+  methods: {
+    startSimulation: function() {
+      this.isStartSimulation = !this.isStartSimulation;
+    }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 table {
   display: flex;
@@ -41,5 +71,8 @@ td {
   border: 1px solid black;
   width: 50px;
   height: 50px;
+}
+#menu {
+  margin-top: 15px;
 }
 </style>
