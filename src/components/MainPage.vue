@@ -2,10 +2,16 @@
   <div>
     <h1>FARM emblem</h1>
     <h2>Step {{stepCount}}</h2>
-    <table v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
-      <tr v-for="(item,index) in row" v-bind:key="`${index}-${rowIndex}`">
-        <td>{{tableData[rowIndex][index]}}</td>
-      </tr>
+    <table>
+      <tbody>
+        <tr v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
+          <td
+            v-for="(item,index) in row"
+            :style="[paint(item)]"
+            v-bind:key="`${index}-${rowIndex}`"
+          >{{tableData[rowIndex][index]}}</td>
+        </tr>
+      </tbody>
     </table>
     <div id="menu">
       <div v-if="isStartSimulation">
@@ -65,7 +71,7 @@ export default {
       if (this.tableData[randRow][randCol] != "") {
         continue;
       } else {
-        this.tableData[randRow][randCol] = "L";
+        this.tableData[randRow][randCol] = "l";
         count++;
       }
     }
@@ -77,7 +83,7 @@ export default {
       if (this.tableData[randRow][randCol] != "") {
         continue;
       } else {
-        this.tableData[randRow][randCol] = "S";
+        this.tableData[randRow][randCol] = "s";
         count++;
       }
     }
@@ -89,7 +95,7 @@ export default {
       if (this.tableData[randRow][randCol] != "") {
         continue;
       } else {
-        this.tableData[randRow][randCol] = "A";
+        this.tableData[randRow][randCol] = "a";
         count++;
       }
     }
@@ -119,6 +125,17 @@ export default {
   },
 
   methods: {
+    paint: function(item) {
+      if (item == "") {
+        return;
+      }
+      if (item == item.toUpperCase()) {
+        return { background: "blue" };
+      }
+      if (item == item.toLowerCase()) {
+        return { background: "red" };
+      }
+    },
     startSimulation: function() {
       this.isStartSimulation = !this.isStartSimulation;
     },
@@ -145,6 +162,7 @@ td {
   border: 1px solid black;
   width: 50px;
   height: 50px;
+  color: white;
 }
 #menu {
   margin-top: 15px;
