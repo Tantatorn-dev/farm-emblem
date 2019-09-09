@@ -60,12 +60,23 @@ export default {
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""]
-      ]
+      ],
+      position: {
+        L: [0, 0],
+        S: [0, 0],
+        A: [0, 0],
+        l1: [0, 0],
+        l2: [0, 0],
+        s1: [0, 0],
+        s2: [0, 0],
+        a1: [0, 0],
+        a2: [0, 0]
+      }
     };
   },
 
   created() {
-    preloadCharacter(this.tableData);
+    preloadCharacter(this.tableData,this.position);
   },
 
   methods: {
@@ -84,11 +95,9 @@ export default {
       this.isStartSimulation = !this.isStartSimulation;
     },
     setNext: function() {
-      this.tableData[3][3] = "";
       this.stepCount += 1;
     },
     setBack: function() {
-      this.tableData[3][3] = "";
       this.stepCount -= 1;
     }
   }
