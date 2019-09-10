@@ -76,7 +76,7 @@ export default {
   },
 
   created() {
-    preloadCharacter(this.tableData,this.position);
+    preloadCharacter(this.tableData, this.position);
   },
 
   methods: {
@@ -105,6 +105,10 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-family: "MedievalSharp", cursive;
+  color: #daa520;
+}
 table {
   display: flex;
   align-items: center;
