@@ -1,10 +1,10 @@
 <template>
-    <img v-if="name=='L'" src="../../assets/lancer.png">
-    <img v-else-if="name=='S'" src="../../assets/swordman.png">
-    <img v-else-if="name=='A'" src="../../assets/axe.png">
-    <img v-else-if="name=='l'" src="../../assets/lancerenemy.png">
-    <img v-else-if="name=='s'" src="../../assets/swordmanenemy.png">
-    <img v-else-if="name=='a'" src="../../assets/axeenemy.png">
+    <img v-if="name=='L'" src="../../assets/character/lancer.png">
+    <img v-else-if="name=='S'" src="../../assets/character/swordman.png">
+    <img v-else-if="name=='A'" src="../../assets/character/axe.png">
+    <img v-else-if="name=='l'" src="../../assets/character/lancerenemy.png">
+    <img v-else-if="name=='s'" src="../../assets/character/swordmanenemy.png">
+    <img v-else-if="name=='a'" src="../../assets/character/axeenemy.png">
 </template>
 
 <script>

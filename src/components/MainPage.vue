@@ -89,7 +89,7 @@ export default {
   methods: {
     paint: function(item) {
       if (item == "") {
-        return;
+        return
       }
       if (item == item.toUpperCase()) {
         return { background: "blue" };
@@ -126,7 +126,7 @@ td {
   border: 1px solid black;
   width: 50px;
   height: 50px;
-  color: white;
+  background-image: url("../assets/terrain/grasstile.png");
 }
 #menu {
   margin-top: 15px;
