@@ -9,7 +9,9 @@
             v-for="(item,index) in row"
             :style="[paint(item)]"
             v-bind:key="`${index}-${rowIndex}`"
-          >{{tableData[rowIndex][index]}}</td>
+          >
+          <Character :name="item"></Character>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -42,9 +44,14 @@
 
 <script>
 import { preloadCharacter } from "../lib/preload";
+import Character from "./character/Character";
 
 export default {
   name: "MainPage",
+
+  components:{
+    Character
+  },
 
   data() {
     return {
