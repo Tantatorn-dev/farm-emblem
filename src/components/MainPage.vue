@@ -25,16 +25,16 @@
           <input
             type="radio"
             name="search type"
-            value="depth first search"
+            value="bread first search"
             checked
             v-model="searchType"
-          /> Depth First Search
+          /> Bread First Search
           <input
             type="radio"
             name="search type"
-            value="depth limited search"
+            value="depth first search"
             v-model="searchType"
-          /> Depth Limited Search
+          /> Depth First Search
         </form>
         <button @click="startSimulation">Start Simulation!</button>
       </div>
@@ -55,7 +55,7 @@ export default {
 
   data() {
     return {
-      searchType: "depth first search",
+      searchType: "bread first search",
       isStartSimulation: false,
       stepCount: 0,
       tableData: [
@@ -89,13 +89,13 @@ export default {
   methods: {
     paint: function(item) {
       if (item == "") {
-        return
+        return ;
       }
       if (item == item.toUpperCase()) {
-        return { background: "blue" };
+        return { background: 'blue' };
       }
       if (item == item.toLowerCase()) {
-        return { background: "red" };
+        return { background: 'red' };
       }
     },
     startSimulation: function() {
