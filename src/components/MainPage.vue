@@ -17,7 +17,7 @@
     </table>
     <div id="menu">
       <div v-if="isStartSimulation">
-        <button @click="setBack">back</button>
+        <button v-if="stepCount > 0" @click="setBack">back</button>
         <button @click="setNext">next</button>
       </div>
       <div v-else>
@@ -98,6 +98,8 @@ export default {
     },
     setBack: function() {
       this.stepCount -= 1;
+      let table = window.BFS.back();
+      this.tableData = table;
     }
   }
 };
