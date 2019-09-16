@@ -100,7 +100,6 @@ var BFS = {
     }
 
     tableLong = tableLong.join("");
-    console.log("hihi", tableLong);
 
     for (let a = 0; a < 3; a++) {
       let allies = BFS.typeNum2Char(a);
