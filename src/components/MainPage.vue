@@ -66,7 +66,7 @@ export default {
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", ""]
+        ["", "", "", "", "", "", "", ""],
       ],
       position: {
         L: [0, 0],
@@ -88,7 +88,7 @@ export default {
 
   methods: {
     paint: function(item) {
-      if (item == "") {
+      if (item == " " || item == "") {
         return;
       }
       if (item == item.toUpperCase()) {
@@ -127,8 +127,8 @@ table {
 }
 td {
   border: 1px solid black;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background-image: url("../assets/terrain/grasstile.png");
 }
 #menu {
