@@ -1221,11 +1221,11 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 15776,
+    STACK_BASE = 15792,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 5258656,
-    DYNAMIC_BASE = 5258656,
-    DYNAMICTOP_PTR = 15744;
+    STACK_MAX = 5258672,
+    DYNAMIC_BASE = 5258672,
+    DYNAMICTOP_PTR = 15760;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1585,7 +1585,7 @@ function isDataURI(filename) {
 
 
 
-var wasmBinaryFile = 'module55.wasm';
+var wasmBinaryFile = 'bfsWASM.wasm';
 if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
 }
@@ -1755,7 +1755,7 @@ var ASM_CONSTS = [];
 
 
 
-// STATICTOP = STATIC_BASE + 14752;
+// STATICTOP = STATIC_BASE + 14768;
 /* global initializers */ /*__ATINIT__.push();*/
 
 
@@ -1766,7 +1766,7 @@ var ASM_CONSTS = [];
 
 
 /* no memory initializer */
-var tempDoublePtr = 15760
+var tempDoublePtr = 15776
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much

@@ -3,20 +3,17 @@ var Module = {
   postRun: [],
   print: (function() {
     return function(text) {
-      if (arguments.length > 1)
-        text = Array.prototype.slice.call(arguments).join(" ");
+      if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(" ");
       console.log(text);
     };
   })(),
   printErr: function(text) {
-    if (arguments.length > 1)
-      text = Array.prototype.slice.call(arguments).join(" ");
+    if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(" ");
     console.error(text);
   },
   canvas: [],
   setStatus: function(text) {
-    if (!Module.setStatus.last)
-      Module.setStatus.last = { time: Date.now(), text: "" };
+    if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: "" };
     if (text === Module.setStatus.last.text) return;
     var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
     var now = Date.now();
@@ -34,11 +31,7 @@ var Module = {
     this.totalDependencies = Math.max(this.totalDependencies, left);
     Module.setStatus(
       left
-        ? "Preparing... (" +
-            (this.totalDependencies - left) +
-            "/" +
-            this.totalDependencies +
-            ")"
+        ? "Preparing... (" + (this.totalDependencies - left) + "/" + this.totalDependencies + ")"
         : "All downloads complete."
     );
   }
@@ -101,12 +94,13 @@ var BFS = {
     let tableLong = [];
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {
-        BFS.table[i][j] = tableIn[i][j];
+        BFS.table[i][j] = tableIn[i][j] == "" ? " " : tableIn[i][j];
       }
-      tableLong[i] = tableIn[i].join("");
+      tableLong[i] = BFS.table[i].join("");
     }
 
     tableLong = tableLong.join("");
+    console.log("hihi", tableLong);
 
     for (let a = 0; a < 3; a++) {
       let allies = BFS.typeNum2Char(a);
@@ -157,13 +151,8 @@ var BFS = {
 
     if (out.action == 0) {
       BFS.table[BFS.posA[out.allies][0]][BFS.posA[out.allies][1]] = " ";
-      BFS.posA[out.allies] = BFS.calcDirection(
-        out.direction,
-        BFS.posA[out.allies]
-      );
-      BFS.table[BFS.posA[out.allies][0]][
-        BFS.posA[out.allies][1]
-      ] = BFS.typeNum2Char(out.allies);
+      BFS.posA[out.allies] = BFS.calcDirection(out.direction, BFS.posA[out.allies]);
+      BFS.table[BFS.posA[out.allies][0]][BFS.posA[out.allies][1]] = BFS.typeNum2Char(out.allies);
     } else {
       let K = BFS.calcDirection(out.direction, BFS.posA[out.allies]);
       BFS.table[K[0]][K[1]] = " ";
@@ -181,20 +170,12 @@ var BFS = {
 
     if (out.action == 0) {
       BFS.table[BFS.posA[out.allies][0]][BFS.posA[out.allies][1]] = " ";
-      BFS.posA[out.allies] = BFS.calcDirection(
-        out.direction,
-        BFS.posA[out.allies],
-        true
-      );
+      BFS.posA[out.allies] = BFS.calcDirection(out.direction, BFS.posA[out.allies], true);
 
-      BFS.table[BFS.posA[out.allies][0]][
-        BFS.posA[out.allies][1]
-      ] = BFS.typeNum2Char(out.allies);
+      BFS.table[BFS.posA[out.allies][0]][BFS.posA[out.allies][1]] = BFS.typeNum2Char(out.allies);
     } else {
       let K = BFS.calcDirection(out.direction, BFS.posA[out.allies]);
-      BFS.table[K[0]][K[1]] = BFS.typeNum2Char(
-        (out.allies + 1) % 3
-      ).toLocaleLowerCase();
+      BFS.table[K[0]][K[1]] = BFS.typeNum2Char((out.allies + 1) % 3).toLocaleLowerCase();
     }
 
     return BFS.table;
