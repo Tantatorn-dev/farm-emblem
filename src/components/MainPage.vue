@@ -10,7 +10,7 @@
             :style="[paint(item)]"
             v-bind:key="`${index}-${rowIndex}`"
           >
-          <Character :name="item"></Character>
+            <Character :name="item"></Character>
           </td>
         </tr>
       </tbody>
@@ -49,7 +49,7 @@ import Character from "./character/Character";
 export default {
   name: "MainPage",
 
-  components:{
+  components: {
     Character
   },
 
@@ -89,20 +89,23 @@ export default {
   methods: {
     paint: function(item) {
       if (item == "") {
-        return ;
+        return;
       }
       if (item == item.toUpperCase()) {
-        return { background: 'blue' };
+        return { background: "blue" };
       }
       if (item == item.toLowerCase()) {
-        return { background: 'red' };
+        return { background: "red" };
       }
     },
     startSimulation: function() {
       this.isStartSimulation = !this.isStartSimulation;
+      window.BFS.findPath(this.tableData);
     },
     setNext: function() {
       this.stepCount += 1;
+      let table = window.BFS.next();
+      this.tableData = table;
     },
     setBack: function() {
       this.stepCount -= 1;
