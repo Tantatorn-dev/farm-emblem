@@ -1221,11 +1221,11 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 15792,
+    STACK_BASE = 15776,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 5258672,
-    DYNAMIC_BASE = 5258672,
-    DYNAMICTOP_PTR = 15760;
+    STACK_MAX = 5258656,
+    DYNAMIC_BASE = 5258656,
+    DYNAMICTOP_PTR = 15744;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1736,8 +1736,6 @@ Module['asm'] = function(global, env, providedBuffer) {
   // table starts at 0 by default (even in dynamic linking, for the main module)
   env['__table_base'] = 0;
 
-  env['abortStackOverflow'] = () => { throw new Error('overflow'); };
-
   var exports = createWasm(env);
   assert(exports, 'binaryen setup failed (no wasm support?)');
   return exports;
@@ -1755,7 +1753,7 @@ var ASM_CONSTS = [];
 
 
 
-// STATICTOP = STATIC_BASE + 14768;
+// STATICTOP = STATIC_BASE + 14752;
 /* global initializers */ /*__ATINIT__.push();*/
 
 
@@ -1766,7 +1764,7 @@ var ASM_CONSTS = [];
 
 
 /* no memory initializer */
-var tempDoublePtr = 15776
+var tempDoublePtr = 15760
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much
