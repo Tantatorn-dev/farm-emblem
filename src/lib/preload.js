@@ -1,4 +1,4 @@
-export function preloadCharacter(tableData, position) {
+export function preloadCharacter(tableData) {
     // random enemies position
        let count = 0;
        while (count != 2) {
@@ -7,12 +7,6 @@ export function preloadCharacter(tableData, position) {
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
-               if(count == 0){
-                position.l1 = [randRow,randCol];
-               }
-               else if(count == 1){
-                position.l2 = [randRow,randCol];
-               }
                tableData[randRow][randCol] = "l";
                count++;
            }
@@ -25,12 +19,6 @@ export function preloadCharacter(tableData, position) {
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
-               if(count == 0){
-                position.s1 = [randRow,randCol];
-               }
-               else if(count == 1){
-                position.s2 = [randRow,randCol];
-               }
                tableData[randRow][randCol] = "s";
                count++;
            }
@@ -43,12 +31,6 @@ export function preloadCharacter(tableData, position) {
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
-               if(count == 0){
-                position.a1 = [randRow,randCol];
-               }
-               else if(count == 1){
-                position.a2 = [randRow,randCol];
-               }
                tableData[randRow][randCol] = "a";
                count++;
            }
@@ -64,15 +46,12 @@ export function preloadCharacter(tableData, position) {
            } else {
                switch (count) {
                    case 0:
-                       position.L = [randRow,randCol];
                        tableData[randRow][randCol] = "L";
                        break;
                    case 1:
-                       position.S = [randRow,randCol];
                        tableData[randRow][randCol] = "S";
                        break;
                    case 2:
-                       position.A = [randRow,randCol];
                        tableData[randRow][randCol] = "A";
                        break;
                }
