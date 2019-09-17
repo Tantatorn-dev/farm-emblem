@@ -19,6 +19,7 @@
       <div v-if="isStartSimulation">
         <button v-if="stepCount > 0" @click="setBack">back</button>
         <button v-if="checkEnd" @click="setNext">next</button>
+        <button @click="reset">Reset</button>
       </div>
       <div v-else>
         <form>
@@ -58,6 +59,7 @@ export default {
       searchType: "bread first search",
       isStartSimulation: false,
       stepCount: 0,
+      startState: [],
       tableData: [
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
@@ -82,6 +84,7 @@ export default {
       } else if (this.searchType == "depth first search") {
         return this.stepCount < window.DFS.action.length;
       }
+      return false;
     }
   },
 
@@ -98,6 +101,7 @@ export default {
       }
     },
     startSimulation: function() {
+      this.startState = this.tableData;
       this.isStartSimulation = !this.isStartSimulation;
       if (this.searchType == "bread first search") {
         window.BFS.findPath(this.tableData);
@@ -124,6 +128,11 @@ export default {
         table = window.DFS.back();
       }
       this.tableData = table;
+    },
+    reset: function() {
+      this.stepCount = 0;
+      this.tableData = this.startState;
+      this.isStartSimulation = !this.isStartSimulation;
     }
   }
 };
