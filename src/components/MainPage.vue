@@ -77,13 +77,17 @@ export default {
 
   computed: {
     checkEnd: function() {
-      return this.stepCount < window.BFS.action.length;
+      if (this.searchType == "bread first search") {
+        return this.stepCount < window.BFS.action.length;
+      } else if (this.searchType == "depth first search") {
+        return this.stepCount < window.DFS.action.length;
+      }
     }
   },
 
   methods: {
     paint: function(item) {
-      if (item == " " || item == "") {
+      if (item == " " || item == "" || item=="#") {
         return;
       }
       if (item == item.toUpperCase()) {
@@ -95,16 +99,30 @@ export default {
     },
     startSimulation: function() {
       this.isStartSimulation = !this.isStartSimulation;
-      window.BFS.findPath(this.tableData);
+      if (this.searchType == "bread first search") {
+        window.BFS.findPath(this.tableData);
+      } else if (this.searchType == "depth first search") {
+        window.DFS.findPath(this.tableData);
+      }
     },
     setNext: function() {
       this.stepCount += 1;
-      let table = window.BFS.next();
+      let table;
+      if (this.searchType == "bread first search") {
+        table = window.BFS.next();
+      } else if (this.searchType == "depth first search") {
+        table = window.DFS.next();
+      }
       this.tableData = table;
     },
     setBack: function() {
       this.stepCount -= 1;
-      let table = window.BFS.back();
+      let table;
+      if (this.searchType == "bread first search") {
+        table = window.BFS.back();
+      } else if (this.searchType == "depth first search") {
+        table = window.DFS.back();
+      }
       this.tableData = table;
     }
   }

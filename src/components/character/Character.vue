@@ -5,6 +5,7 @@
     <img v-else-if="name=='l'" src="../../assets/character/lancerenemy.png">
     <img v-else-if="name=='s'" src="../../assets/character/swordmanenemy.png">
     <img v-else-if="name=='a'" src="../../assets/character/axeenemy.png">
+    <img v-else-if="name=='#'" src="../../assets/terrain/mountaintile4.png">
 </template>
 
 <script>
