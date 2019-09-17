@@ -18,7 +18,7 @@
     <div id="menu">
       <div v-if="isStartSimulation">
         <button v-if="stepCount > 0" @click="setBack">back</button>
-        <button @click="setNext">next</button>
+        <button v-if="checkEnd" @click="setNext">next</button>
       </div>
       <div v-else>
         <form>
@@ -66,13 +66,19 @@ export default {
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", ""],
-      ],
+        ["", "", "", "", "", "", "", ""]
+      ]
     };
   },
 
   created() {
     preloadCharacter(this.tableData, this.position);
+  },
+
+  computed: {
+    checkEnd: function() {
+      return this.stepCount < window.BFS.bufView.length;
+    }
   },
 
   methods: {
