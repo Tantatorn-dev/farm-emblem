@@ -77,7 +77,7 @@ export default {
 
   computed: {
     checkEnd: function() {
-      return this.stepCount < window.BFS.bufView.length;
+      return this.stepCount < window.BFS.action.length;
     }
   },
 
