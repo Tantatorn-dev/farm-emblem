@@ -109,7 +109,7 @@ export default {
   methods: {
     paint1: function(i, j) {
       return {
-        "animation-delay": "" + i * j * 0.04 + "s"
+        "animation-delay": "" + i * j * 0.04 - 3 + "s"
       };
     },
     paint: function(item) {
