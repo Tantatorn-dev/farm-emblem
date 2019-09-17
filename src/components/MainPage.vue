@@ -42,6 +42,12 @@
         <button @click="startSimulation">Start Simulation!</button>
       </div>
     </div>
+    <audio id="audioWalk">
+      <source src="@/assets/sound/walk.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="audioAttack">
+      <source src="@/assets/sound/Attack.ogg" type="audio/ogg" />
+    </audio>
   </div>
 </template>
 
@@ -118,12 +124,27 @@ export default {
       }
     },
     setNext: function() {
+      let audioWalk = document.getElementById("audioWalk");
+      let audioAttack = document.getElementById("audioAttack");
+
       this.stepCount += 1;
       let table;
+      let action;
       if (this.searchType == "bread first search") {
+        action = window.BFS.action[window.BFS.index];
         table = window.BFS.next();
       } else if (this.searchType == "depth first search") {
+        action = window.DFS.action[window.DFS.index];
         table = window.DFS.next();
+      }
+      if (action.action == 0) {
+        audioWalk.pause();
+        audioWalk.currentTime = 0;
+        audioWalk.play();
+      } else {
+        audioAttack.pause();
+        audioAttack.currentTime = 0;
+        audioAttack.play();
       }
       this.tableData = table;
     },
