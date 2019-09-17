@@ -48,6 +48,9 @@
     <audio id="audioAttack">
       <source src="@/assets/sound/Attack.ogg" type="audio/ogg" />
     </audio>
+    <audio id="audioBGM" loop>
+      <source src="@/assets/sound/BGM.mp3" type="audio/mpeg" />
+    </audio>
   </div>
 </template>
 
@@ -84,6 +87,11 @@ export default {
   created() {
     preloadCharacter(this.tableData, this.position);
   },
+  mounted() {
+    let audioWalk = document.getElementById("audioBGM");
+    audioWalk.volume = 0.3;
+    audioWalk.play();
+  },
 
   computed: {
     checkEnd: function() {
@@ -99,8 +107,7 @@ export default {
   methods: {
     paint1: function(i, j) {
       return {
-        // "transition-delay": "" + Math.random() + "s",
-        "animation-delay": "" + Math.random() + "s"
+        "animation-delay": "" + i * j * 0.04 + "s"
       };
     },
     paint: function(item) {
@@ -184,8 +191,9 @@ td {
   height: 65px;
   background-image: url("../assets/terrain/grasstile.png");
   animation-name: bg;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 #menu {
   margin-top: 15px;
@@ -197,8 +205,7 @@ td {
   100% {
     background-position-x: 5px;
   }
-  45%,
-  65% {
+  50% {
     background-position-x: -5px;
   }
 }
