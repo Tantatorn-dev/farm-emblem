@@ -87,7 +87,7 @@ export default {
 
   methods: {
     paint: function(item) {
-      if (item == " " || item == "" || item=="#") {
+      if (item == " " || item == "" || item == "#") {
         return;
       }
       if (item == item.toUpperCase()) {
@@ -142,8 +142,8 @@ table {
 }
 td {
   border: 1px solid black;
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   background-image: url("../assets/terrain/grasstile.png");
 }
 #menu {
