@@ -5,12 +5,10 @@
     <table>
       <tbody>
         <tr v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
-          <td
-            v-for="(item,index) in row"
-            :style="[paint(item)]"
-            v-bind:key="`${index}-${rowIndex}`"
-          >
-            <Character :name="item"></Character>
+          <td v-for="(item,index) in row" v-bind:key="`${index}-${rowIndex}`">
+            <div :style="[paint(item)]">
+              <Character :name="item"></Character>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -94,10 +92,10 @@ export default {
         return;
       }
       if (item == item.toUpperCase()) {
-        return { background: "blue" };
+        return { "background-image": "linear-gradient(DeepSkyBlue, blue)" };
       }
       if (item == item.toLowerCase()) {
-        return { background: "red" };
+        return { "background-image": "linear-gradient(yellow, red)" };
       }
     },
     startSimulation: function() {
