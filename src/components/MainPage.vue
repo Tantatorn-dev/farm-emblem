@@ -5,7 +5,11 @@
     <table>
       <tbody>
         <tr v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
-          <td v-for="(item,index) in row" v-bind:key="`${index}-${rowIndex}`">
+          <td
+            v-for="(item,index) in row"
+            v-bind:key="`${index}-${rowIndex}`"
+            :style="[paint1(rowIndex, index)]"
+          >
             <div :style="[paint(item)]">
               <Character :name="item"></Character>
             </div>
@@ -15,8 +19,8 @@
     </table>
     <div id="menu">
       <div v-if="isStartSimulation">
-        <button v-if="stepCount > 0" @click="setBack">back</button>
-        <button v-if="checkEnd" @click="setNext">next</button>
+        <button v-if="stepCount > 0" @click="setBack">&lt;= back</button>
+        <button v-if="checkEnd" @click="setNext">next = &gt;</button>
         <button @click="reset">Reset</button>
       </div>
       <div v-else>
@@ -87,6 +91,12 @@ export default {
   },
 
   methods: {
+    paint1: function(i, j) {
+      return {
+        // "transition-delay": "" + Math.random() + "s",
+        "animation-delay": "" + Math.random() + "s"
+      };
+    },
     paint: function(item) {
       if (item == " " || item == "" || item == "#") {
         return;
@@ -152,8 +162,23 @@ td {
   width: 65px;
   height: 65px;
   background-image: url("../assets/terrain/grasstile.png");
+  animation-name: bg;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 #menu {
   margin-top: 15px;
+}
+
+/* Standard syntax */
+@keyframes bg {
+  0%,
+  100% {
+    background-position-x: 5px;
+  }
+  45%,
+  65% {
+    background-position-x: -5px;
+  }
 }
 </style>
