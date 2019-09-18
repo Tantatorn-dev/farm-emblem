@@ -170,8 +170,13 @@ var BFS = {
   posA: [],
 
   findPath: function(tableIn) {
+    let start = window.performance.now();
+
     let res = Search.findPath(tableIn, "findPathBFS");
     BFS = { ...BFS, ...res };
+
+    let end = window.performance.now();
+    return { time: end - start };
   },
 
   next: function() {
@@ -196,8 +201,13 @@ var DFS = {
   posA: [],
 
   findPath: function(tableIn) {
+    let start = window.performance.now();
+
     let res = Search.findPath(tableIn, "findPathDFS");
     DFS = { ...DFS, ...res };
+
+    let end = window.performance.now();
+    return { time: end - start };
   },
 
   next: function() {

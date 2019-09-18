@@ -82,7 +82,8 @@ export default {
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""],
         ["", "", "", "", "", "", "", ""]
-      ]
+      ],
+      timeUse: 0
     };
   },
 
@@ -126,12 +127,14 @@ export default {
     startSimulation: function() {
       this.startState = this.tableData;
       this.isStartSimulation = !this.isStartSimulation;
+      let out;
       if (this.searchType == "bread first search") {
-        window.BFS.findPath(this.tableData);
+        out = window.BFS.findPath(this.tableData);
       } else if (this.searchType == "depth first search") {
-        window.DFS.findPath(this.tableData);
+        out = window.DFS.findPath(this.tableData);
       }
-      this.stepDes = "Click 'Next' to show next step";
+      this.timeUse = out.time;
+      this.stepDes = `Click 'Next' to show next step. Run time ${this.timeUse}ms.`;
     },
     setNext: function() {
       let audioWalk = document.getElementById("audioWalk");
