@@ -1,16 +1,12 @@
 <template>
   <div>
     <h1>FARM emblem</h1>
-    <h2>Step {{stepCount}}</h2>
-    <h4>{{stepDes}}</h4>
+    <h2>Step {{ stepCount }}</h2>
+    <h4>{{ stepDes }}</h4>
     <table>
       <tbody>
-        <tr v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
-          <td
-            v-for="(item,index) in row"
-            v-bind:key="`${index}-${rowIndex}`"
-            :style="[paint1(rowIndex, index)]"
-          >
+        <tr v-for="(row, rowIndex) in tableData" v-bind:key="rowIndex">
+          <td v-for="(item, index) in row" v-bind:key="`${index}-${rowIndex}`" :style="[paint1(rowIndex, index)]">
             <div :style="[paint(item)]">
               <Character :name="item"></Character>
             </div>
