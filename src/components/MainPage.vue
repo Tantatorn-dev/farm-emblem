@@ -1,15 +1,11 @@
 <template>
   <div>
     <h1>FARM emblem</h1>
-    <h2>Step {{stepCount}}</h2>
+    <h2>Step {{ stepCount }}</h2>
     <table>
       <tbody>
-        <tr v-for="(row,rowIndex) in tableData" v-bind:key="rowIndex">
-          <td
-            v-for="(item,index) in row"
-            :style="[paint(item)]"
-            v-bind:key="`${index}-${rowIndex}`"
-          >
+        <tr v-for="(row, rowIndex) in tableData" v-bind:key="rowIndex">
+          <td v-for="(item, index) in row" :style="[paint(item)]" v-bind:key="`${index}-${rowIndex}`">
             <Character :name="item"></Character>
           </td>
         </tr>
@@ -23,19 +19,9 @@
       </div>
       <div v-else>
         <form>
-          <input
-            type="radio"
-            name="search type"
-            value="bread first search"
-            checked
-            v-model="searchType"
-          /> Bread First Search
-          <input
-            type="radio"
-            name="search type"
-            value="depth first search"
-            v-model="searchType"
-          /> Depth First Search
+          <input type="radio" name="search type" value="bread first search" checked v-model="searchType" /> Bread First
+          Search <input type="radio" name="search type" value="depth first search" v-model="searchType" /> Depth First
+          Search
         </form>
         <button @click="startSimulation">Start Simulation!</button>
       </div>
@@ -61,21 +47,21 @@ export default {
       stepCount: 0,
       startState: [],
       tableData: [
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "","", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
       ]
     };
   },
@@ -100,10 +86,10 @@ export default {
       if (item == " " || item == "" || item == "#") {
         return;
       }
-      if (item == "##") {
+      if (item == "*") {
         return { background: "#f4d03f" };
       }
-      if (item == "###") {
+      if (item == "%") {
         return { background: " #2980b9" };
       }
       if (item == item.toUpperCase()) {
