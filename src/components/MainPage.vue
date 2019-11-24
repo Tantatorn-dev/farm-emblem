@@ -100,6 +100,12 @@ export default {
       if (item == " " || item == "" || item == "#") {
         return;
       }
+      if (item == "##") {
+        return { background: "#f4d03f" };
+      }
+      if (item == "###") {
+        return { background: " #2980b9" };
+      }
       if (item == item.toUpperCase()) {
         return { background: "blue" };
       }

@@ -1,9 +1,9 @@
 export function preloadCharacter(tableData) {
     // random enemies position
        let count = 0;
-       while (count != 2) {
-           let randRow = Math.floor(Math.random() * 4);
-           let randCol = Math.floor(Math.random() * 7);
+       while (count != 3) {
+           let randRow = Math.floor(Math.random() * 7);
+           let randCol = Math.floor(Math.random() * 14);
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
@@ -13,9 +13,9 @@ export function preloadCharacter(tableData) {
        }
    
        count = 0;
-       while (count != 2) {
-           let randRow = Math.floor(Math.random() * 4);
-           let randCol = Math.floor(Math.random() * 7);
+       while (count != 3) {
+           let randRow = Math.floor(Math.random() * 7);
+           let randCol = Math.floor(Math.random() * 14);
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
@@ -25,9 +25,9 @@ export function preloadCharacter(tableData) {
        }
    
        count = 0;
-       while (count != 2) {
-           let randRow = Math.floor(Math.random() * 4);
-           let randCol = Math.floor(Math.random() * 7);
+       while (count != 3) {
+           let randRow = Math.floor(Math.random() * 7);
+           let randCol = Math.floor(Math.random() * 14);
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
@@ -39,8 +39,8 @@ export function preloadCharacter(tableData) {
        //random allies position
        count = 0;
        while (count != 3) {
-           let randRow = Math.floor(Math.random() * 3) + 5;
-           let randCol = Math.floor(Math.random() * 7);
+           let randRow = Math.floor(Math.random() * 7) + 8;
+           let randCol = Math.floor(Math.random() * 14);
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
@@ -59,11 +59,11 @@ export function preloadCharacter(tableData) {
            }
        }
 
-       //random allies position
+       //random terrains
        count = 0;
-       while (count != 5) {
-           let randRow = 4;
-           let randCol = Math.floor(Math.random() * 7);
+       while (count != 8) {
+           let randRow = 7;
+           let randCol = Math.floor(Math.random() * 14);
            if (tableData[randRow][randCol] != "") {
                continue;
            } else {
@@ -72,4 +72,29 @@ export function preloadCharacter(tableData) {
            }
        }
 
+       // sand tile
+       count = 0;
+       while (count != 15) {
+           let randRow = Math.floor(Math.random() * 14);
+           let randCol = Math.floor(Math.random() * 14);
+           if (tableData[randRow][randCol] != "") {
+               continue;
+           } else {
+               tableData[randRow][randCol] = "##"
+               count++;
+           }
+       }
+
+       // water tile
+       count = 0;
+       while (count != 15) {
+           let randRow = Math.floor(Math.random() * 14);
+           let randCol = Math.floor(Math.random() * 14);
+           if (tableData[randRow][randCol] != "") {
+               continue;
+           } else {
+               tableData[randRow][randCol] = "###"
+               count++;
+           }
+       }
 }
