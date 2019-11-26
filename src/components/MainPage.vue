@@ -6,7 +6,11 @@
     <table>
       <tbody>
         <tr v-for="(row, rowIndex) in tableData" v-bind:key="rowIndex">
-          <td v-for="(item, index) in row" v-bind:key="`${index}-${rowIndex}`" :style="[paint1(rowIndex, index)]">
+          <td
+            v-for="(item, index) in row"
+            v-bind:key="`${index}-${rowIndex}`"
+            :style="[paint1(rowIndex, index)]"
+          >
             <div :style="[paint(item)]">
               <Character :name="item"></Character>
             </div>
@@ -22,9 +26,9 @@
       </div>
       <div v-else>
         <form>
-          <input type="radio" name="search type" value="bread first search" checked v-model="searchType" /> Bread First
-          Search <input type="radio" name="search type" value="depth first search" v-model="searchType" /> Depth First
-          Search
+          <!-- <input type="radio" name="search type" value="bread first search" checked v-model="searchType" /> Bread First Search
+          <input type="radio" name="search type" value="depth first search" v-model="searchType" /> Depth First Search-->
+          <input type="radio" name="search type" value="astar" v-model="searchType" /> Astar Search
         </form>
         <button @click="startSimulation">Start Simulation!</button>
       </div>
@@ -54,7 +58,7 @@ export default {
 
   data() {
     return {
-      searchType: "bread first search",
+      searchType: "astar",
       stepDes: "- Click 'Start Simulation!' at bottom -",
       isStartSimulation: false,
       stepCount: 0,
@@ -95,6 +99,8 @@ export default {
         return this.stepCount < window.BFS.action.length;
       } else if (this.searchType == "depth first search") {
         return this.stepCount < window.DFS.action.length;
+      } else if (this.searchType == "astar") {
+        return this.stepCount < window.Astar.action.length;
       }
       return false;
     }
@@ -131,6 +137,8 @@ export default {
         out = window.BFS.findPath(this.tableData);
       } else if (this.searchType == "depth first search") {
         out = window.DFS.findPath(this.tableData);
+      } else if (this.searchType == "astar") {
+        out = window.Astar.findPath(this.tableData);
       }
       this.timeUse = out.time;
       this.stepDes = `Click 'Next' to show next step. Run time ${this.timeUse}ms.`;
@@ -148,6 +156,9 @@ export default {
       } else if (this.searchType == "depth first search") {
         action = window.DFS.action[window.DFS.index];
         table = window.DFS.next();
+      } else if (this.searchType == "astar") {
+        action = window.Astar.action[window.Astar.index];
+        table = window.Astar.next();
       }
       this.stepDes = "Charactor < ";
       switch (action.allies) {
@@ -212,6 +223,8 @@ export default {
         table = window.BFS.back();
       } else if (this.searchType == "depth first search") {
         table = window.DFS.back();
+      } else if (this.searchType == "astar") {
+        table = window.Astar.back();
       }
       this.tableData = table;
     },
@@ -241,10 +254,10 @@ td {
   width: 50px;
   height: 50px;
   background-image: url("../assets/terrain/grasstile.png");
-  animation-name: bg;
+  /* animation-name: bg;
   animation-duration: 3s;
   animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out; */
 }
 
 button {

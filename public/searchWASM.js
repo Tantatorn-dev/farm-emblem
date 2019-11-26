@@ -1221,21 +1221,21 @@ function updateGlobalBufferAndViews(buf) {
 
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 15808,
+    STACK_BASE = 15840,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 527808,
-    DYNAMIC_BASE = 527808,
-    DYNAMICTOP_PTR = 15776;
+    STACK_MAX = 20848,
+    DYNAMIC_BASE = 20848,
+    DYNAMICTOP_PTR = 15808;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
 
 
 
-var TOTAL_STACK = 512000;
+var TOTAL_STACK = 5000;
 if (Module['TOTAL_STACK']) assert(TOTAL_STACK === Module['TOTAL_STACK'], 'the stack size can no longer be determined at runtime')
 
-var INITIAL_TOTAL_MEMORY = Module['TOTAL_MEMORY'] || 1048576;if (!Object.getOwnPropertyDescriptor(Module, 'TOTAL_MEMORY')) Object.defineProperty(Module, 'TOTAL_MEMORY', { get: function() { abort('Module.TOTAL_MEMORY has been replaced with plain INITIAL_TOTAL_MEMORY') } });
+var INITIAL_TOTAL_MEMORY = Module['TOTAL_MEMORY'] || 65536;if (!Object.getOwnPropertyDescriptor(Module, 'TOTAL_MEMORY')) Object.defineProperty(Module, 'TOTAL_MEMORY', { get: function() { abort('Module.TOTAL_MEMORY has been replaced with plain INITIAL_TOTAL_MEMORY') } });
 
 assert(INITIAL_TOTAL_MEMORY >= TOTAL_STACK, 'TOTAL_MEMORY should be larger than TOTAL_STACK, was ' + INITIAL_TOTAL_MEMORY + '! (TOTAL_STACK=' + TOTAL_STACK + ')');
 
@@ -1868,7 +1868,7 @@ var emscriptenMemoryProfiler = {
     html += '. STACK_MAX: ' + toHex(STACK_MAX, width) + '.';
     html += '<br />STACK memory area used now (should be zero): ' + self.formatBytes(STACKTOP - STACK_BASE) + '.' + colorBar('#FFFF00') + ' STACK watermark highest seen usage (approximate lower-bound!): ' + self.formatBytes(self.stackTopWatermark - STACK_BASE);
 
-    var DYNAMIC_BASE = 527808;
+    var DYNAMIC_BASE = 20848;
     var DYNAMICTOP = HEAP32[DYNAMICTOP_PTR>>2];
     html += "<br />DYNAMIC memory area size: " + self.formatBytes(DYNAMICTOP - DYNAMIC_BASE);
     html += ". DYNAMIC_BASE: " + toHex(DYNAMIC_BASE, width);
@@ -2156,7 +2156,7 @@ var ASM_CONSTS = [];
 
 
 
-// STATICTOP = STATIC_BASE + 14784;
+// STATICTOP = STATIC_BASE + 14816;
 /* global initializers */ /*__ATINIT__.push();*/
 
 
@@ -2167,7 +2167,7 @@ var ASM_CONSTS = [];
 
 
 /* no memory initializer */
-var tempDoublePtr = 15792
+var tempDoublePtr = 15824
 assert(tempDoublePtr % 8 == 0);
 
 function copyTempFloat(ptr) { // functions, because inlining this code increases code size too much
@@ -2864,16 +2864,10 @@ var _fflush = Module["_fflush"] = function() {
   return Module["asm"]["_fflush"].apply(null, arguments)
 };
 
-var _findPathBFS = Module["_findPathBFS"] = function() {
+var _findPathAstar = Module["_findPathAstar"] = function() {
   assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
   assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-  return Module["asm"]["_findPathBFS"].apply(null, arguments)
-};
-
-var _findPathDFS = Module["_findPathDFS"] = function() {
-  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-  return Module["asm"]["_findPathDFS"].apply(null, arguments)
+  return Module["asm"]["_findPathAstar"].apply(null, arguments)
 };
 
 var _free = Module["_free"] = function() {

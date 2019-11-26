@@ -80,9 +80,9 @@ var Search = {
     let action = [];
 
     let tableLong = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < tableIn.length; i++) {
       table[i] = [];
-      for (let j = 0; j < 8; j++) {
+      for (let j = 0; j < tableIn[i].length; j++) {
         table[i][j] = tableIn[i][j] == "" ? " " : tableIn[i][j];
       }
       tableLong[i] = table[i].join("");
@@ -94,8 +94,8 @@ var Search = {
       let allies = Search.typeNum2Char(a);
 
       let isRun = false;
-      for (let i = 0; i < 8 && !isRun; i++) {
-        for (let j = 0; j < 8 && !isRun; j++) {
+      for (let i = 0; i < tableIn.length && !isRun; i++) {
+        for (let j = 0; j < tableIn[i].length && !isRun; j++) {
           if (table[i][j] == allies) {
             posA[a] = [];
             posA[a][0] = i;
@@ -222,5 +222,36 @@ var DFS = {
     let res = Search.back(DFS.index, DFS.action, DFS.table, DFS.posA);
     DFS = { ...DFS, ...res };
     return DFS.table;
+  }
+};
+
+var Astar = {
+  table: [],
+  action: [],
+  index: 0,
+  posA: [],
+
+  findPath: function(tableIn) {
+    let start = window.performance.now();
+
+    let res = Search.findPath(tableIn, "findPathAstar");
+    Astar = { ...Astar, ...res };
+
+    let end = window.performance.now();
+    return { time: end - start };
+  },
+
+  next: function() {
+    if (Astar.index >= Astar.action.length) return null;
+    let res = Search.next(Astar.index, Astar.action, Astar.table, Astar.posA);
+    Astar = { ...Astar, ...res };
+    return Astar.table;
+  },
+
+  back: function() {
+    if (Astar.index <= 0) return null;
+    let res = Search.back(Astar.index, Astar.action, Astar.table, Astar.posA);
+    Astar = { ...Astar, ...res };
+    return Astar.table;
   }
 };
