@@ -78,12 +78,15 @@ var Search = {
     let table = [];
     let posA = [];
     let action = [];
+    let tableFirst = [];
 
     let tableLong = [];
     for (let i = 0; i < tableIn.length; i++) {
       table[i] = [];
+      tableFirst[i] = [];
       for (let j = 0; j < tableIn[i].length; j++) {
         table[i][j] = tableIn[i][j] == "" ? " " : tableIn[i][j];
+        tableFirst[i][j] = table[i][j];
       }
       tableLong[i] = table[i].join("");
     }
@@ -123,15 +126,21 @@ var Search = {
       action[i] = out;
     }
 
-    return { table, posA, action, index: 0 };
+    return { table, posA, action, index: 0, tableFirst };
   },
 
-  next: function(index, action, table, posA) {
+  next: function(index, action, table, posA, tableFirst) {
     if (index >= action.length) return null;
     let out = action[index];
 
     if (out.action == 0) {
-      table[posA[out.allies][0]][posA[out.allies][1]] = " ";
+      var mapAtFirst = tableFirst[posA[out.allies][0]][posA[out.allies][1]];
+      if (mapAtFirst == " " || mapAtFirst == "#" || mapAtFirst == "*" || mapAtFirst == "%") {
+        table[posA[out.allies][0]][posA[out.allies][1]] = mapAtFirst;
+      } else {
+        table[posA[out.allies][0]][posA[out.allies][1]] = " ";
+      }
+
       posA[out.allies] = Search.calcDirection(out.direction, posA[out.allies]);
       table[posA[out.allies][0]][posA[out.allies][1]] = Search.typeNum2Char(out.allies);
     } else {
@@ -143,16 +152,21 @@ var Search = {
     return { index, action, table, posA };
   },
 
-  back: function(index, action, table, posA) {
+  back: function(index, action, table, posA, tableFirst) {
     if (index <= 0) return null;
     index--;
 
     let out = action[index];
 
     if (out.action == 0) {
-      table[posA[out.allies][0]][posA[out.allies][1]] = " ";
-      posA[out.allies] = Search.calcDirection(out.direction, posA[out.allies], true);
+      var mapAtFirst = tableFirst[posA[out.allies][0]][posA[out.allies][1]];
+      if (mapAtFirst == " " || mapAtFirst == "#" || mapAtFirst == "*" || mapAtFirst == "%") {
+        table[posA[out.allies][0]][posA[out.allies][1]] = mapAtFirst;
+      } else {
+        table[posA[out.allies][0]][posA[out.allies][1]] = " ";
+      }
 
+      posA[out.allies] = Search.calcDirection(out.direction, posA[out.allies], true);
       table[posA[out.allies][0]][posA[out.allies][1]] = Search.typeNum2Char(out.allies);
     } else {
       let K = Search.calcDirection(out.direction, posA[out.allies]);
@@ -230,6 +244,7 @@ var Astar = {
   action: [],
   index: 0,
   posA: [],
+  tableFirst: [],
 
   findPath: function(tableIn) {
     let start = window.performance.now();
@@ -243,14 +258,14 @@ var Astar = {
 
   next: function() {
     if (Astar.index >= Astar.action.length) return null;
-    let res = Search.next(Astar.index, Astar.action, Astar.table, Astar.posA);
+    let res = Search.next(Astar.index, Astar.action, Astar.table, Astar.posA, Astar.tableFirst);
     Astar = { ...Astar, ...res };
     return Astar.table;
   },
 
   back: function() {
     if (Astar.index <= 0) return null;
-    let res = Search.back(Astar.index, Astar.action, Astar.table, Astar.posA);
+    let res = Search.back(Astar.index, Astar.action, Astar.table, Astar.posA, Astar.tableFirst);
     Astar = { ...Astar, ...res };
     return Astar.table;
   }
